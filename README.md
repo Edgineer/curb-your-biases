@@ -1,11 +1,22 @@
-French Wordglue is a chrome extension aimed towards helping you practice conversing in french. Learning apps help you learn and memorize words but now you can put that knowledge to use by having to come up with your own sentences and phrases as you would do in any conversation.
+# Mumbo Jumbo
 
-Installation
+![French Speaker](/icon128.png)
 
-Before installing make sure you have npm installed. 
-Download the files from this repository
-From the root folder use the command 'npm install' to download the dependencies from package.json.
-Use the command 'npm run build' to create the dist/ folder which is used to bundle the source files.
-Open google chrome and enter 'chrome://extension' in the search tab.
-Turn on 'Developer mode' and then select load unpackage.
-Select the folder containig all the files, and voila! the chrome extension in now installed.
+Mumbo Jumbo is a Google chrome extension which is meant to be used as a tool to supplement language learning. The extension prompts users to create a sentence or phrase which includes some random words from the target language. By doing so, users are exercising their innate conversational skills as opposed to relying on memory or learnt words.
+
+
+## Installation
+
+1. Before installing make sure you have npm installed.
+
+2. Download the files from this repository into a directory.
+
+3. From the root folder use the command 'npm install' to download the dependencies from package.json.
+
+4. Use the command 'npm run build' to create the dist/ folder which is used to bundle the source files.
+
+5. Open a window in your google chrome browser and go to **chrome://extension**.
+
+6. Toggle on **Developer mode** and then click on the **load unpackage** button.
+
+7. Select the folder containing all the files from this directory, and voila! the chrome extension in now installed.
