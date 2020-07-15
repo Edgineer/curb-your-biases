@@ -2,10 +2,10 @@ body {
   margin: 0;
   padding: 1em;
   min-width: 350px;
-  /* background: #f8f5f2; */
-  background: #ffc801;
-  font-family: proxima-nova, sans-serif;
-  font-weight: bold;
+  background: #fffffe;
+  font-family: sofia-pro,sans-serif;
+  font-weight: 700;
+  font-style: normal;
   font-size: 12px;
 }
 
@@ -27,12 +27,13 @@ ul{
 
 li {
   color: #ffaf93;
+  font-family: sofia-pro,sans-serif;
 }
 
 textarea {
-  font-family: proxima-nova, sans-serif;
+  font-family: sofia-pro,sans-serif;
   width: 90%;
-  height: 100px;
+  height: 110px;
   padding: 12px 20px;
   margin: 4px 0;
   box-sizing: border-box; 
@@ -60,3 +61,9 @@ button {
 #submit{
   background-color: #69d295;
 }
+
+#charCount{
+  font-size: x-small;
+  float: right;
+}
+

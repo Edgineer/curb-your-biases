@@ -9,10 +9,14 @@ class Session extends React.Component {
     this.state= { 
       numWords: 0,
       randWords: [],
-      isClicked: []
+      isClicked: [],
+      userInput: "",
+      charCount: 0
     }
     this.reset = this.reset.bind(this);
     this.mouseClick = this.mouseClick.bind(this);
+    this.userTyping = this.userTyping.bind(this);
+    this.checkInput = this.checkInput.bind(this);
   }
 
   reset () {
@@ -27,7 +31,9 @@ class Session extends React.Component {
       return { 
         numWords: num,
         randWords: [...newWords],
-        isClicked: [...initHover]
+        isClicked: [...initHover],
+        userInput: "",
+        charCount: 0
       }
     });
   }
@@ -47,6 +53,20 @@ class Session extends React.Component {
     });
   }
 
+  userTyping(event){
+    var input = event.target.value;
+    console.log(input);
+    console.log(input.length);
+    this.setState({
+      userInput: input,
+      charCount: input.length
+    });
+  }
+
+  checkInput() {
+    this.reset();  
+  }
+
   render() {
     const randWordList = this.state.randWords.map((randWord, i) =>(
       <li>
@@ -60,8 +80,11 @@ class Session extends React.Component {
       <h1>Mumbo Jumbo!</h1>
       <p> Create a sentence that contains the following words:</p>
       <ul>{randWordList}</ul>
-      <textarea placeholder="Be creative!" />
-      <button id="submit" onClick={this.reset}>Submit!</button>
+      <div>
+        <textarea value={this.state.userInput} onChange={this.userTyping} spellcheck="false" maxlength="128"/>
+      </div>
+      <p id="charCount">{this.state.charCount}/128</p>
+      <button id="submit" onClick={this.checkInput}>Submit!</button>
       <hr />
       <span>
         <p className="footer">Created by Edgineer</p>
