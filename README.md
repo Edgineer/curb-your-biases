@@ -5,6 +5,8 @@
 Mumbo Jumbo is a Google chrome extension which is meant to be used as a tool to supplement language learning. The extension prompts users to create a sentence or phrase which includes some random words from the target language. By doing so, users are exercising their innate conversational skills as opposed to relying on memory or learnt words.
 
 
+Currently supports only French.
+
 ## Installation
 
 1. Before installing make sure you have npm installed.
@@ -15,7 +17,7 @@ Mumbo Jumbo is a Google chrome extension which is meant to be used as a tool to 
 
 4. Use the command 'npm run build' to create the dist/ folder which is used to bundle the source files.
 
-5. Open a window in your google chrome browser and go to **chrome://extension**.
+5. Open a window in your google chrome browser and go to **chrome://extensions**.
 
 6. Toggle on **Developer mode** and then click on the **load unpackage** button.
 

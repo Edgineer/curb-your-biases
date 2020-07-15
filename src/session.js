@@ -58,7 +58,7 @@ class Session extends React.Component {
     ));
     return (
     <>
-      <h1>French Wordglue</h1>
+      <h1>Mumbo Jumbo!</h1>
       <p> Create a sentence that contains the following words:</p>
       <ul>{wordList}</ul>
       <textarea placeholder="Be creative!" />
