@@ -1,9 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "Cuurb Your Biases",
-  "description": "Let's rethink each other",
+  "name": "French Wordglue",
+  "description": "Form creative sentences from the given words to help you improve your french",
   "version": "1.0",
   "browser_action": {
     "default_popup": "index.html"
-  }
+  },
+  "icons": { 
+    "64": "icon64.png",
+   "128": "icon128.png" }
 }
