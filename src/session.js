@@ -123,6 +123,7 @@ class Session extends React.Component {
     else if(this.state.errors.length == 0){
       feedbackMessage = <>
         <p className="feedbackText" id="passed">Voila! Well done</p>
+        <br />
         <button id="submit" onClick={this.reset}>More Words!</button>
       </>
     }
@@ -156,13 +157,15 @@ class Session extends React.Component {
       <ul>{randWordList}</ul>
       <div>
         <textarea value={this.state.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
+        <p id="charCount">{this.state.charCount}/128</p>
       </div>
-      <p id="charCount">{this.state.charCount}/128</p>
       <br />
       {feedbackMessage}
       <hr />
       <span>
         <p className="footer">Created by Edgineer</p>
+        <p className="mentions">Sentences checked by <a href="https://languagetool.org/" title="Language Tool">Language Tool</a></p>
+        <p className="mentions">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
       </span>
     </>
     );
