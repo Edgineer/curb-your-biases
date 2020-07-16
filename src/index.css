@@ -32,6 +32,7 @@ li {
 
 textarea {
   font-family: sofia-pro,sans-serif;
+  outline: none;
   width: 90%;
   height: 110px;
   padding: 12px 20px;
@@ -68,3 +69,21 @@ button {
   float: right;
 }
 
+#passed{
+  color: #078080;
+}
+
+#mistakes{
+  font-size: small;
+  color:#f45d48;
+}
+
+#fixLine{
+  font-size: small;
+  margin: 0px;
+}
+
+#errorList{
+  overflow: hidden;
+  white-space: nowrap;
+}
