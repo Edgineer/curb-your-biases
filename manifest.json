@@ -7,6 +7,6 @@
     "default_popup": "index.html"
   },
   "icons": { 
-    "64": "icon64.png",
-   "128": "icon128.png" }
+    "64": "assets/icon64.png",
+   "128": "assets/icon128.png" }
 }
