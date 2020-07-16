@@ -69,21 +69,15 @@ button {
   float: right;
 }
 
-#passed{
-  color: #078080;
-}
-
-#mistakes{
-  font-size: small;
-  color:#f45d48;
-}
-
-#fixLine{
+.feedbackText{
   font-size: small;
   margin: 0px;
 }
 
-#errorList{
-  overflow: hidden;
-  white-space: nowrap;
+#passed{
+  color: #078080;
+}
+
+#mistake{
+  color:#f45d48;
 }

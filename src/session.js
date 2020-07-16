@@ -1,10 +1,8 @@
 import React from "react";
 import './index.css';
-import axios from "axios";
 import "regenerator-runtime/runtime.js";
 
 var frenchWords = require("../french.json");
-
 
 class Session extends React.Component {
   constructor(props){
@@ -19,24 +17,24 @@ class Session extends React.Component {
       errors: []
     }
     this.reset = this.reset.bind(this);
-    this.mouseClick = this.mouseClick.bind(this);
-    this.userTyping = this.userTyping.bind(this);
+    this.definitionToggle = this.definitionToggle.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
     this.checkInput = this.checkInput.bind(this);
   }
 
   reset () {
     var num = Math.floor(Math.random() * (5 - 2)) + 2;
-    var initHover = Array(num).fill(false);
-    var newWords = [];
+    var noHover = Array(num).fill(false);
+    var newRandWords = [];
     for (let i = 0; i < num; i++) {
       var randWord = frenchWords[Math.floor(Math.random()*frenchWords.length)];
-      newWords.push({"word": randWord.word, "translation": randWord.translation});
+      newRandWords.push({"word": randWord.word, "translation": randWord.translation});
     }
     this.setState(() => {
       return { 
         numWords: num,
-        randWords: [...newWords],
-        isClicked: [...initHover],
+        randWords: [...newRandWords],
+        isClicked: [...noHover],
         userInput: "",
         charCount: 0,
         hasSubmitted: false,
@@ -46,10 +44,12 @@ class Session extends React.Component {
   }
 
   componentDidMount() {
+    //POSSIBLE TODO:
+    //check in the google local storage and set the correct states
     this.reset();
   }
 
-  mouseClick(index) {
+  definitionToggle(index) {
     this.setState((state) => {
       const isClicked = state.isClicked.map((item,i) => {
         if (index === i) {return !item;}
@@ -59,7 +59,7 @@ class Session extends React.Component {
     });
   }
 
-  userTyping(event){
+  handleUserInput(event){
     var input = event.target.value;
     this.setState({
       userInput: input,
@@ -81,11 +81,10 @@ class Session extends React.Component {
       }
     });
     if(!res.ok){
+      //Improve error handling
       console.log("Sorry there is an error!");
     }
     var data = await res.json();
-    console.log(data);
-
     var errList = [];
     data.matches.forEach(error => {
       var errObj = {};
@@ -106,13 +105,12 @@ class Session extends React.Component {
       hasSubmitted: true,
       errors: errList
     });
-    console.log(this.state.errors);
   }
 
   render() {
     const randWordList = this.state.randWords.map((randWord, i) =>(
       <li>
-        <button onClick={() => this.mouseClick(i)}>
+        <button onClick={() => this.definitionToggle(i)}>
           {this.state.isClicked[i] ? randWord.translation : randWord.word}
         </button>
       </li>
@@ -124,25 +122,29 @@ class Session extends React.Component {
     }
     else if(this.state.errors.length == 0){
       feedbackMessage = <>
-        <p id="passed">Voila! Well done</p>
+        <p className="feedbackText" id="passed">Voila! Well done</p>
         <button id="submit" onClick={this.reset}>More Words!</button>
       </>
     }
     else {
-      var errorDisplay = this.state.errors.map(err => (
+      var errorsDisplay = this.state.errors.map(err => (
         <>
-          <p id="mistakes">{err.message}</p>
-          <p id="fixLine">Mistake: <span id="mistakes">{err.mistake}</span></p>
-          <p id="fixLine"><span>Suggestions: </span> 
-            {err.suggestions.map((e, i) => [
+          <p id="mistake" className="feedbackText">{err.message}</p>
+          <p className="feedbackText">Mistake: <span id="mistake">{err.mistake}</span></p>
+          <p className="feedbackText"><span>Suggestions: </span> 
+            { err.suggestions.length == 0 
+              ? <span id="mistake">No matches found :/</span>
+              : err.suggestions.map((e, i) => [
                 i > 0 && ", ",
                 <span id="passed">{e}</span>
-            ])}
+              ])
+            }
           </p>
+          <br />
         </>
       ));
       feedbackMessage = <>
-        {errorDisplay}
+        {errorsDisplay}
         <br />
         <button id="submit" onClick={this.checkInput}>Check!</button>
       </>
@@ -153,7 +155,7 @@ class Session extends React.Component {
       <p> Create a sentence that contains the following words:</p>
       <ul>{randWordList}</ul>
       <div>
-        <textarea value={this.state.userInput} onChange={this.userTyping} spellcheck="false" maxlength="128"/>
+        <textarea value={this.state.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
       </div>
       <p id="charCount">{this.state.charCount}/128</p>
       <br />
