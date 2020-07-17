@@ -2,7 +2,7 @@ import React from "react";
 import './index.css';
 import "regenerator-runtime/runtime.js";
 
-var frenchWords = require("../french.json");
+var frenchWords = require("../languages/french.json");
 
 class Session extends React.Component {
   constructor(props){

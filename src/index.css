@@ -52,6 +52,7 @@ textarea {
 }
 
 button {
+  font-family: sofia-pro,sans-serif;
   background-color: #f45d48;
   color: #232323;
   border-radius: 12px;
