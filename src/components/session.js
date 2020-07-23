@@ -1,58 +1,55 @@
 import React from "react";
-import './index.css';
+import '../index.css';
 import "regenerator-runtime/runtime.js";
-
-var frenchWords = require("../languages/french.json");
+import { connect } from 'react-redux';
+import {getNewWords, provideNewInput} from "../actions";
+import { checkInput, resetWords } from "../functionalities";
 
 class Session extends React.Component {
   constructor(props){
     super(props);
-    this.state= { 
-      numWords: 0,
-      randWords: [],
-      isClicked: [],
-      userInput: "",
-      charCount: 0,
+    
+    var charCount = this.props.userInput.length;
+    var noHover = Array(parseInt(this.props.numWords)).fill(false);
+
+    this.state = { 
+      isClicked: noHover,
+      charCount: charCount,
       hasSubmitted: false,
       errors: []
     }
+
     this.reset = this.reset.bind(this);
-    this.definitionToggle = this.definitionToggle.bind(this);
+    this.translationToggle = this.translationToggle.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
-    this.checkInput = this.checkInput.bind(this);
+    this.validateSubmission = this.validateSubmission.bind(this);
   }
 
   reset () {
-    var num = Math.floor(Math.random() * (5 - 2)) + 2;
-    var noHover = Array(num).fill(false);
-    var newRandWords = [];
-    for (let i = 0; i < num; i++) {
-      var randWord = frenchWords[Math.floor(Math.random()*frenchWords.length)];
-      newRandWords.push({"word": randWord.word, "translation": randWord.translation});
-    }
+    var newSessionParams = resetWords();
+
+    localStorage.setItem("numWords", newSessionParams.numWords);
+    localStorage.setItem("userInput", "");
+    localStorage.setItem("randWords", newSessionParams.randWords);
+
+    var noHover = Array(parseInt(newSessionParams.numWords)).fill(false);
+
     this.setState(() => {
       return { 
-        numWords: num,
-        randWords: [...newRandWords],
-        isClicked: [...noHover],
-        userInput: "",
+        isClicked: noHover,
         charCount: 0,
         hasSubmitted: false,
         errors: []
       }
     });
+
+    this.props.dispatch(getNewWords(newSessionParams.randWords, newSessionParams.numWords));
   }
 
-  componentDidMount() {
-    //POSSIBLE TODO:
-    //check in the google local storage and set the correct states
-    this.reset();
-  }
-
-  definitionToggle(index) {
+  translationToggle(indexToSwitch) {
     this.setState((state) => {
       const isClicked = state.isClicked.map((item,i) => {
-        if (index === i) {return !item;}
+        if (indexToSwitch === i) {return !item;}
         else {return item;}
       });
       return {isClicked};
@@ -62,55 +59,33 @@ class Session extends React.Component {
   handleUserInput(event){
     var input = event.target.value;
     this.setState({
-      userInput: input,
       charCount: input.length
     });
+    localStorage.setItem("userInput",input);
+    this.props.dispatch(provideNewInput(input));
   }
 
-  async checkInput() {
-    var payload = new URLSearchParams();
-    payload.set("text",this.state.userInput);
-    payload.set("language","fr");
-    payload.set("enabledOnly","false");
-    
-    var res = await fetch("https://languagetool.org/api/v2/check",{
-      method: 'POST',
-      body: payload.toString(),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    });
-    if(!res.ok){
-      //Improve error handling
-      console.log("Sorry there is an error!");
-    }
-    var data = await res.json();
-    var errList = [];
-    data.matches.forEach(error => {
-      var errObj = {};
-      errObj["message"] = error["message"];
-
-      var mistake = error["sentence"].slice(error["offset"],error["offset"]+error["length"]);
-      errObj["mistake"] = mistake;
-
-      var suggestions = [];
-      for (let i = 0; i < error["replacements"].length && i <= 2; i++) {
-        suggestions.push(error["replacements"][i]["value"]);
-      }
-      errObj["suggestions"] = suggestions;
-
-      errList.push(errObj);
-    });
-    this.setState({
-      hasSubmitted: true,
-      errors: errList
+  validateSubmission() {
+    var checkPromise = checkInput(this.props.userInput);
+    checkPromise.then((errList) => {
+      this.setState({
+        hasSubmitted: true,
+        errors: errList
+      });
     });
   }
 
   render() {
-    const randWordList = this.state.randWords.map((randWord, i) =>(
+    var randWordsObj = JSON.parse(this.props.randWords)
+    var randWordsObjKeys = Object.keys(randWordsObj);
+    var randWordsObjList = [];
+    randWordsObjKeys.map((k) => {
+      randWordsObjList.push(randWordsObj[k]);
+    })
+
+    const randWordList = randWordsObjList.map((randWord, i) =>(
       <li>
-        <button onClick={() => this.definitionToggle(i)}>
+        <button onClick={() => this.translationToggle(i)}>
           {this.state.isClicked[i] ? randWord.translation : randWord.word}
         </button>
       </li>
@@ -118,7 +93,7 @@ class Session extends React.Component {
 
     let feedbackMessage;
     if (!this.state.hasSubmitted){
-      feedbackMessage = <button id="submit" onClick={this.checkInput}>Check!</button>
+      feedbackMessage = <button id="submit" onClick={this.validateSubmission}>Check!</button>
     }
     else if(this.state.errors.length == 0){
       feedbackMessage = <>
@@ -147,7 +122,7 @@ class Session extends React.Component {
       feedbackMessage = <>
         {errorsDisplay}
         <br />
-        <button id="submit" onClick={this.checkInput}>Check!</button>
+        <button id="submit" onClick={this.validateSubmission}>Check!</button>
       </>
     }
     return (
@@ -156,7 +131,7 @@ class Session extends React.Component {
       <p> Create a sentence that contains the following words:</p>
       <ul>{randWordList}</ul>
       <div>
-        <textarea value={this.state.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
+        <textarea value={this.props.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
         <p id="charCount">{this.state.charCount}/128</p>
       </div>
       <br />
@@ -172,4 +147,10 @@ class Session extends React.Component {
   }
 }
 
-export default Session;
+const mapStateToProps = (state) => ({
+  numWords: state.numWords,
+  userInput: state.userInput,
+  randWords: state.randWords
+})
+
+export default connect(mapStateToProps)(Session);

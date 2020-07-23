@@ -43,12 +43,23 @@ textarea {
   border-radius: 4px;
 }
 
+select {
+  font-family: sofia-pro,sans-serif;
+  width: 30%;
+  outline: none;
+  padding: 12px;
+  border: 2px solid #f45d48;
+  border-radius: 4px;
+  resize: vertical;
+}
+
 .footer {
   color: #222525;
   font-size: small;
 }
 .mentions{
   font-size: x-small;
+  margin: 0px;
 }
 
 button {

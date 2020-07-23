@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Session from "./session.js";
+import Root from "./components/root";
 
-class App extends React.Component {
-  render() {
-    return (
-      <Session />
-    );
-  }
-}
-ReactDOM.render(<App />, document.getElementById("root"));
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer } from './reducers';
+
+const store = createStore(rootReducer);
+
+const App = () => (
+  <Provider store={store}>
+    <Root />
+  </Provider>
+)
+
+ReactDOM.render(<App />,document.getElementById("root"));

@@ -3,6 +3,9 @@
   "name": "Mumbo Jumbo",
   "description": "Form creative sentences from the given words to help you improve your french",
   "version": "1.0",
+  "permissions": [
+    "storage"
+  ],
   "browser_action": {
     "default_popup": "index.html"
   },
