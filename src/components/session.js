@@ -97,7 +97,7 @@ class Session extends React.Component {
     }
     else if(this.state.errors.length == 0){
       feedbackMessage = <>
-        <p className="feedbackText" id="passed">Voila! Well done</p>
+        <p className="feedbackText" id="passed">Well done!</p>
         <br />
         <button id="submit" onClick={this.reset}>More Words!</button>
       </>

@@ -93,7 +93,7 @@ class Tutorial extends React.Component {
     }
     else if(this.state.errors.length == 0){
       feedbackMessage = <>
-        <p className="feedbackText" id="passed">Voila! Well done</p>
+        <p className="feedbackText" id="passed">Well done!</p>
         <br />
         <button id="submit" onClick={this.exitTutorial}>Complete Tutorial!</button>
       </>
@@ -127,7 +127,7 @@ class Tutorial extends React.Component {
         <h1>Mumbo Jumbo Tutorial</h1>
         <p>Click on the word to see its English translation</p>
         <ul>{randWordList}</ul>
-        <p> Come up with and write a sentence in french that contains the words in the buttons:</p>
+        <p> Think of a sentence that contains the words in the buttons and write it below:</p>
         <div>
           <textarea value={this.props.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
           <p id="charCount">{this.state.charCount}/128</p>

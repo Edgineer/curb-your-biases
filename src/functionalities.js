@@ -1,11 +1,25 @@
 var frenchWords = require("../languages/french.json");
+var spanishWords = require("../languages/spanish.json");
 
 export function resetWords () {
   var num = Math.floor(Math.random() * (5 - 2)) + 2;
   var noHover = Array(num).fill(false);
+  
+  var userLanguage = localStorage.getItem("language");
+  var words;
+  switch (userLanguage) {
+    case "french":
+      words = frenchWords;
+      break;
+    case "spanish":
+      words = spanishWords;
+      break;  
+    default:
+     break;
+ }
   var newRandWords = [];
   for (let i = 0; i < num; i++) {
-    var randWord = frenchWords[Math.floor(Math.random()*frenchWords.length)];
+    var randWord = words[Math.floor(Math.random()*words.length)];
     newRandWords.push({"word": randWord.word, "translation": randWord.translation});
   }
 
@@ -26,9 +40,22 @@ export function resetWords () {
 
 
 export const checkInput = async function(userInput) {
+  var userLanguage = localStorage.getItem("language");
+  var langCode;
+  switch (userLanguage) {
+    case "french":
+      langCode = "fr";
+      break;
+    case "spanish":
+      langCode = "es";
+      break;  
+    default:
+     break;
+ }
+
   var payload = new URLSearchParams();
   payload.set("text", userInput);
-  payload.set("language","fr");
+  payload.set("language",langCode);
   payload.set("enabledOnly","false");
   
   var res = await fetch("https://languagetool.org/api/v2/check",{
