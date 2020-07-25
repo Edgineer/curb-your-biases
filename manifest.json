@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Mumbo Jumbo",
-  "description": "Form creative sentences from the given words to help you improve your french",
-  "version": "1.0",
+  "description": "Language learning gamified. Form sentences in your target language to improve your conversational skills",
+  "version": "1.0.0",
   "permissions": [
     "storage"
   ],
@@ -10,6 +10,6 @@
     "default_popup": "index.html"
   },
   "icons": { 
-    "64": "assets/icon64.png",
-   "128": "assets/icon128.png" }
+    "64": "assets/worldText64.png",
+   "128": "assets/worldText128.png" }
 }
