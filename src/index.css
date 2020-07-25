@@ -13,6 +13,10 @@ hr, h1{
   color: #232323;
 }
 
+a {
+  text-decoration: none;
+}
+
 p {
   color: #222525;
   opacity: 1;
@@ -54,9 +58,25 @@ select {
 }
 
 .footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer p {
   color: #222525;
   font-size: small;
 }
+
+.footer a {
+  color: #222525;
+  font-size: small;
+  cursor: pointer;
+  font-weight: normal;
+}
+
 .mentions{
   font-size: x-small;
   margin: 0px;
@@ -94,6 +114,19 @@ button {
   color: #078080;
 }
 
+#start {
+  background-color: #69d295;
+  color: #232323;
+}
+
 #mistake{
   color:#f45d48;
+}
+
+#header{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }

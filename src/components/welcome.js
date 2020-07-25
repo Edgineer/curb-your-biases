@@ -19,7 +19,6 @@ class Welcome extends React.Component {
   }
 
   getStarted() {
-
     var firstSession;
     switch (this.state.curLanguage) {
       case "french":
@@ -61,7 +60,7 @@ class Welcome extends React.Component {
           </select>
         </form>
         <br />
-        <button onClick={this.getStarted}>Get Started!</button>
+        <button id="start" onClick={this.getStarted}>Get Started!</button>
       </>
     )
   }

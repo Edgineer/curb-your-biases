@@ -2,7 +2,7 @@ import React from "react";
 import '../index.css';
 import "regenerator-runtime/runtime.js";
 import { connect } from 'react-redux';
-import {getNewWords, provideNewInput} from "../actions";
+import {getNewWords, provideNewInput, resetLanguage} from "../actions";
 import { checkInput, resetWords } from "../functionalities";
 
 class Session extends React.Component {
@@ -23,6 +23,7 @@ class Session extends React.Component {
     this.translationToggle = this.translationToggle.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
     this.validateSubmission = this.validateSubmission.bind(this);
+    this.changeLanguage = this.changeLanguage.bind(this);
   }
 
   reset () {
@@ -73,6 +74,15 @@ class Session extends React.Component {
         errors: errList
       });
     });
+  }
+
+  changeLanguage() {
+    localStorage.removeItem("language");
+    localStorage.removeItem("numWords");
+    localStorage.removeItem("userInput");
+    localStorage.removeItem("randWords");
+    
+    this.props.dispatch(resetLanguage());
   }
 
   render() {
@@ -127,8 +137,10 @@ class Session extends React.Component {
     }
     return (
     <>
-      <h1>Mumbo Jumbo!</h1>
-      <p> Create a sentence that contains the following words:</p>
+      <div id="header">
+        <h1>Mumbo Jumbo!</h1>
+      </div>
+      <p> Create a sentence in {this.props.language} that contains the following words:</p>
       <ul>{randWordList}</ul>
       <div>
         <textarea value={this.props.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
@@ -138,7 +150,10 @@ class Session extends React.Component {
       {feedbackMessage}
       <hr />
       <span>
-        <p className="footer">Created by Edgineer</p>
+        <div className="footer">
+          <p>Created by Edgineer</p>
+          <a onClick={this.changeLanguage}>Change Language</a>
+        </div>
         <p className="mentions">Sentences checked by <a href="https://languagetool.org/" title="Language Tool">Language Tool</a></p>
         <p className="mentions">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
       </span>
@@ -148,6 +163,7 @@ class Session extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  language: state.language,
   numWords: state.numWords,
   userInput: state.userInput,
   randWords: state.randWords

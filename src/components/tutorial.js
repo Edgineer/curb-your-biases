@@ -127,19 +127,13 @@ class Tutorial extends React.Component {
         <h1>Mumbo Jumbo Tutorial</h1>
         <p>Click on the word to see its English translation</p>
         <ul>{randWordList}</ul>
-        <p> Think of a sentence that contains the words in the buttons and write it below:</p>
+        <p> Write a sentence in {this.props.language} that contains the word(s) from the buttons:</p>
         <div>
           <textarea value={this.props.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
           <p id="charCount">{this.state.charCount}/128</p>
         </div>
         <br />
         {feedbackMessage}
-        <hr />
-        <span>
-          <p className="footer">Created by Edgineer</p>
-          <p className="mentions">Sentences checked by <a href="https://languagetool.org/" title="Language Tool">Language Tool</a></p>
-          <p className="mentions">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
-        </span>
       </>
     )
   }
@@ -147,6 +141,7 @@ class Tutorial extends React.Component {
 
 const mapStateToProps = (state) => ({
   didTutorial: state.didTutorial,
+  language: state.language,
   numWords: state.numWords,
   userInput: state.userInput,
   randWords: state.randWords

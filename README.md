@@ -19,6 +19,6 @@ Currently supports only French.
 
 4. Open a window in your google chrome browser and go to **chrome://extensions**.
 
-5. Toggle on **Developer mode** and then click on the **load unpacked** button.
+5. Toggle on **Developer mode** and then click on the **Load unpacked** button.
 
 6. Select the folder containing all the files from this directory, and voila! the chrome extension in now installed.

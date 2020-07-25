@@ -2,7 +2,8 @@ import {
   SELECT_LANGUAGE, 
   COMPLETE_TUTORIAL,
   PROVIDE_NEW_INPUT,
-  GET_NEW_WORDS
+  GET_NEW_WORDS,
+  RESET_LANGUAGE
  } from './actions';
 
 const getInitialState = () => {
@@ -47,6 +48,10 @@ export const rootReducer = (state = getInitialState(), action) => {
     case PROVIDE_NEW_INPUT:
       return Object.assign({}, state, {
         userInput: action.input
+      })
+    case RESET_LANGUAGE:
+      return Object.assign({}, state, {
+        language: null
       })
     default:
       return state;
