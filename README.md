@@ -1,11 +1,11 @@
 # Mumbo Jumbo
 
-![French Speaker](assets/worldText128.png)
+![World Chatting](assets/worldText128.png)
 
 Mumbo Jumbo is a Google chrome extension which is meant to be used as a tool to supplement language learning. The extension prompts users to create a sentence or phrase which includes some random words from the target language. By doing so, users are exercising their innate conversational skills as opposed to relying on memory or learnt words.
 
 
-Currently supports only French.
+Currently supports French + Spanish.
 
 ## Installation
 
