@@ -2,8 +2,9 @@ import React from "react";
 import '../index.css';
 import "regenerator-runtime/runtime.js";
 import { connect } from 'react-redux';
-import {getNewWords, provideNewInput, resetLanguage} from "../actions";
+import { getNewWords, provideNewInput } from "../actions";
 import { checkInput, resetWords } from "../functionalities";
+import Footer from "./footer";
 
 class Session extends React.Component {
   constructor(props){
@@ -23,7 +24,6 @@ class Session extends React.Component {
     this.translationToggle = this.translationToggle.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
     this.validateSubmission = this.validateSubmission.bind(this);
-    this.changeLanguage = this.changeLanguage.bind(this);
     this.playAudio = this.playAudio.bind(this);
   }
 
@@ -75,16 +75,6 @@ class Session extends React.Component {
         errors: errList
       });
     });
-  }
-
-  changeLanguage() {
-    localStorage.removeItem("language");
-    localStorage.removeItem("voice");
-    localStorage.removeItem("numWords");
-    localStorage.removeItem("userInput");
-    localStorage.removeItem("randWords");
-    
-    this.props.dispatch(resetLanguage());
   }
 
   playAudio() {
@@ -156,14 +146,7 @@ class Session extends React.Component {
       <br />
       {feedbackMessage}
       <hr />
-      <span>
-        <div className="footer">
-          <p>Created by Edgineer</p>
-          <a onClick={this.changeLanguage}>Change Language</a>
-        </div>
-        <p className="mentions">Sentences checked by <a href="https://languagetool.org/" title="Language Tool">Language Tool</a></p>
-        <p className="mentions">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a></p>
-      </span>
+      <Footer />
     </>
     );
   }

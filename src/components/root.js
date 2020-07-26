@@ -2,8 +2,6 @@ import React from "react";
 import Session from "./session.js";
 import Welcome from "./welcome.js";
 import Tutorial from "./tutorial.js";
-
-
 import { connect } from 'react-redux';
 
 class Root extends React.Component {

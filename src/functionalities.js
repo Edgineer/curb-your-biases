@@ -1,25 +1,29 @@
-var frenchWords = require("../languages/french.json");
-var spanishWords = require("../languages/spanish.json");
+import {langMap} from "./languageMap";
+
+export function getVoice () {
+  var userLang = localStorage.getItem("language");
+  var userLangObj = langMap.get(userLang);
+  return userLangObj.voice;
+}
+
+export function getDefaultSession () {
+  var userLang = localStorage.getItem("language");
+  var userLangObj = langMap.get(userLang);
+  return userLangObj.defaultSession;
+}
 
 export function resetWords () {
-  var num = Math.floor(Math.random() * (5 - 2)) + 2;
-  var noHover = Array(num).fill(false);
+
+  var randNum = Math.floor(Math.random() * (5 - 2)) + 2; //random number between [2-5]
+  var translationArr = Array(randNum).fill(false);
   
-  var userLanguage = localStorage.getItem("language");
-  var words;
-  switch (userLanguage) {
-    case "french":
-      words = frenchWords;
-      break;
-    case "spanish":
-      words = spanishWords;
-      break;  
-    default:
-     break;
- }
+  var userLang = localStorage.getItem("language");
+  var userLangObj = langMap.get(userLang);
+  var vocabWords = userLangObj.vocab;
+
   var newRandWords = [];
-  for (let i = 0; i < num; i++) {
-    var randWord = words[Math.floor(Math.random()*words.length)];
+  for (let i = 0; i < randNum; i++) {
+    var randWord = vocabWords[Math.floor(Math.random()*vocabWords.length)];
     newRandWords.push({"word": randWord.word, "translation": randWord.translation});
   }
 
@@ -27,12 +31,10 @@ export function resetWords () {
   newRandWords.map((word,i) => {
     randWordsObject[i] = word;
   });
-  
-  var numRandWordsStr = newRandWords.length.toString();
 
   var newSessionParams = {
-    isClicked: noHover,
-    numWords: numRandWordsStr,
+    isClicked: translationArr,
+    numWords:   randNum.toString(),
     randWords: JSON.stringify(randWordsObject)
   }
   return newSessionParams;
@@ -69,18 +71,9 @@ export const checkInput = async function(userInput, randWords) {
     errList.push(errObj);
   }
 
-  var userLanguage = localStorage.getItem("language");
-  var langCode;
-  switch (userLanguage) {
-    case "french":
-      langCode = "fr";
-      break;
-    case "spanish":
-      langCode = "es";
-      break;  
-    default:
-     break;
- }
+  var userLang = localStorage.getItem("language");
+  var userLangObj = langMap.get(userLang);
+  var langCode = userLangObj.code;
 
   var payload = new URLSearchParams();
   payload.set("text", userInput);
