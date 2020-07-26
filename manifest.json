@@ -11,5 +11,7 @@
   },
   "icons": { 
     "64": "assets/worldText64.png",
-   "128": "assets/worldText128.png" }
+   "128": "assets/worldText128.png" 
+  },
+  "content_security_policy": "script-src 'self' https://code.responsivevoice.org/responsivevoice.js; object-src 'self'"
 }

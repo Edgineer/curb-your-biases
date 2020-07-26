@@ -105,6 +105,11 @@ button {
   margin: 0px;
 }
 
+#audio-btn{
+  outline: none;
+  border: none;
+}
+
 .feedbackText{
   font-size: small;
   margin: 0px;

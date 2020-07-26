@@ -20,12 +20,15 @@ class Welcome extends React.Component {
 
   getStarted() {
     var firstSession;
+    var voice;
     switch (this.state.curLanguage) {
       case "french":
-        var firstSession = {"0": {"word":"Bonjour","translation":"Hello"}};        
+        firstSession = {"0": {"word":"Bonjour","translation":"Hello"}};
+        voice = "French Female";
         break;
       case "spanish":
-        var firstSession = {"0": {"word":"Hola","translation":"Hello"}};
+        firstSession = {"0": {"word":"Hola","translation":"Hello"}};
+        voice = "Spanish Female";
         break;
       default:
         break;
@@ -43,8 +46,9 @@ class Welcome extends React.Component {
     var numWords =  localStorage.getItem("numWords");
     this.props.dispatch(getNewWords(randWords,numWords))
 
-    this.props.dispatch(selectLanguage(this.state.curLanguage));
+    this.props.dispatch(selectLanguage(this.state.curLanguage, voice));
     localStorage.setItem("language",this.state.curLanguage);
+    localStorage.setItem("voice", voice);
   }
 
   render(){

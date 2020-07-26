@@ -23,10 +23,15 @@ class Tutorial extends React.Component {
       errors: []
     }    
 
+    this.playAudio = this.playAudio.bind(this);
     this.translationToggle = this.translationToggle.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
     this.validateSubmission = this.validateSubmission.bind(this);
     this.exitTutorial = this.exitTutorial.bind(this);
+  }
+
+  playAudio() {
+    responsiveVoice.speak(this.props.userInput,this.props.voice);
   }
 
   translationToggle(indexToSwitch) {
@@ -49,7 +54,7 @@ class Tutorial extends React.Component {
   }
 
   validateSubmission() {
-    var checkPromise = checkInput(this.props.userInput);
+    var checkPromise = checkInput(this.props.userInput, this.props.randWords);
     checkPromise.then((errList) => {
       this.setState({
         hasSubmitted: true,
@@ -72,7 +77,6 @@ class Tutorial extends React.Component {
   }
 
   render(){
-
     var randWordsObj = JSON.parse(this.props.randWords);
     var randWordsObjKeys = Object.keys(randWordsObj);
     var randWordsObjList = [];
@@ -131,6 +135,7 @@ class Tutorial extends React.Component {
         <div>
           <textarea value={this.props.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
           <p id="charCount">{this.state.charCount}/128</p>
+          <input id="audio-btn" type="image" src="../../assets/speaker24.png" alt="Play!" onClick={this.playAudio} />
         </div>
         <br />
         {feedbackMessage}
@@ -142,6 +147,7 @@ class Tutorial extends React.Component {
 const mapStateToProps = (state) => ({
   didTutorial: state.didTutorial,
   language: state.language,
+  voice: state.voice,
   numWords: state.numWords,
   userInput: state.userInput,
   randWords: state.randWords

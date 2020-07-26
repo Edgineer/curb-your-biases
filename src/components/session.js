@@ -24,6 +24,7 @@ class Session extends React.Component {
     this.handleUserInput = this.handleUserInput.bind(this);
     this.validateSubmission = this.validateSubmission.bind(this);
     this.changeLanguage = this.changeLanguage.bind(this);
+    this.playAudio = this.playAudio.bind(this);
   }
 
   reset () {
@@ -67,7 +68,7 @@ class Session extends React.Component {
   }
 
   validateSubmission() {
-    var checkPromise = checkInput(this.props.userInput);
+    var checkPromise = checkInput(this.props.userInput, this.props.randWords);
     checkPromise.then((errList) => {
       this.setState({
         hasSubmitted: true,
@@ -78,11 +79,16 @@ class Session extends React.Component {
 
   changeLanguage() {
     localStorage.removeItem("language");
+    localStorage.removeItem("voice");
     localStorage.removeItem("numWords");
     localStorage.removeItem("userInput");
     localStorage.removeItem("randWords");
     
     this.props.dispatch(resetLanguage());
+  }
+
+  playAudio() {
+    responsiveVoice.speak(this.props.userInput,this.props.voice);
   }
 
   render() {
@@ -145,6 +151,7 @@ class Session extends React.Component {
       <div>
         <textarea value={this.props.userInput} onChange={this.handleUserInput} spellcheck="false" maxlength="128"/>
         <p id="charCount">{this.state.charCount}/128</p>
+        <input id="audio-btn" type="image" src="../../assets/speaker24.png" alt="Play!" onClick={this.playAudio} />
       </div>
       <br />
       {feedbackMessage}
@@ -164,6 +171,7 @@ class Session extends React.Component {
 
 const mapStateToProps = (state) => ({
   language: state.language,
+  voice: state.voice,
   numWords: state.numWords,
   userInput: state.userInput,
   randWords: state.randWords

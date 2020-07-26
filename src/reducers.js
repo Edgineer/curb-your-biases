@@ -9,6 +9,7 @@ import {
 const getInitialState = () => {
 
   var language = localStorage.getItem("language");
+  var voice = localStorage.getItem("voice");
   var didTutorial = localStorage.getItem("didTutorial");
   var numWords = localStorage.getItem("numWords");
   var userInput = localStorage.getItem("userInput");
@@ -18,6 +19,7 @@ const getInitialState = () => {
 
   var initState = {
     "language": language,
+    "voice": voice,
     "didTutorial": didTutorial,
     "numWords": numWords,
     "userInput": userInput,
@@ -33,7 +35,8 @@ export const rootReducer = (state = getInitialState(), action) => {
   switch (action.type){
     case SELECT_LANGUAGE:
       return Object.assign({}, state, {
-        language: action.language
+        language: action.language,
+        voice: action.voice
       })
     case COMPLETE_TUTORIAL:
       return Object.assign({}, state, {
@@ -51,7 +54,8 @@ export const rootReducer = (state = getInitialState(), action) => {
       })
     case RESET_LANGUAGE:
       return Object.assign({}, state, {
-        language: null
+        language: null,
+        voice: null
       })
     default:
       return state;

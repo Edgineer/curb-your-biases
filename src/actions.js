@@ -5,9 +5,10 @@ export const PROVIDE_NEW_INPUT = "PROVIDE_NEW_INPUT";
 export const COMPLETE_TUTORIAL = "COMPLETE_TUTORIAL";
 export const RESET_LANGUAGE = "RESET_LANGUAGE";
 
-export const selectLanguage = lang => ({
+export const selectLanguage = (lang, voice) => ({
   type: SELECT_LANGUAGE,
-  language: lang
+  language: lang,
+  voice: voice
 });
 
 export const getNewWords = (words, num) => ({

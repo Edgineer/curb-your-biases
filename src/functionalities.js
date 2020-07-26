@@ -38,8 +38,37 @@ export function resetWords () {
   return newSessionParams;
 }
 
+function getRandWordsNotUsed (userInput, randWords) {
+  var lowerInput = userInput.toLowerCase();
+  var wordsNotUsed = [];
 
-export const checkInput = async function(userInput) {
+  var randWordsObj = JSON.parse(randWords);
+  var randWordsObjKeys = Object.keys(randWordsObj);
+  var randWordsObjList = [];
+  randWordsObjKeys.map((k) => {
+    randWordsObjList.push(randWordsObj[k]);
+  })
+  randWordsObjList.forEach(wordObj => {
+    if (!lowerInput.includes(wordObj.word.toLowerCase())) {
+      wordsNotUsed.push(wordObj.word);
+    }
+  });
+  return wordsNotUsed.join(", ");
+}
+
+export const checkInput = async function(userInput, randWords) {
+
+  var errList = [];
+
+  var wordsNotUsed = getRandWordsNotUsed(userInput, randWords);
+  if (wordsNotUsed != ""){
+    var errObj = {};
+    errObj["message"] = "One or more required words were not used.";
+    errObj["mistake"] = wordsNotUsed;
+    errObj["suggestions"] = ["Use the required words"];
+    errList.push(errObj);
+  }
+
   var userLanguage = localStorage.getItem("language");
   var langCode;
   switch (userLanguage) {
@@ -65,12 +94,13 @@ export const checkInput = async function(userInput) {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   });
+
   if(!res.ok){
     //Improve error handling
     console.log("Sorry there is an error!");
   }
+
   var data = await res.json();
-  var errList = [];
   data.matches.forEach(error => {
     var errObj = {};
     errObj["message"] = error["message"];
