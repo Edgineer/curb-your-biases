@@ -34,4 +34,6 @@ class Footer extends React.Component {
   }
 }
 
+//Here to access dispatch for resetLanguage, maybe not required?
+const mapStateToProps = (state) => ({})
 export default connect(mapStateToProps)(Footer);
