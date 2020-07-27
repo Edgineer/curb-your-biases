@@ -8,7 +8,7 @@ class Welcome extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      curLanguage: "french"
+      curLanguage: "english"
     }
 
     this.getStarted = this.getStarted.bind(this);
@@ -47,6 +47,7 @@ class Welcome extends React.Component {
         <br />
         <form>
           <select value={this.state.curLanguage} onChange={this.handleLangSelection}>
+            <option value="english">English</option>
             <option value="french">French</option>
             <option value="spanish">Spanish</option>
           </select>
