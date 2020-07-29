@@ -1,7 +1,8 @@
 import React from "react";
-import Session from "./session.js";
-import Welcome from "./welcome.js";
-import Tutorial from "./tutorial.js";
+import Session from "./session";
+import Welcome from "./welcome";
+import Tutorial from "./tutorial";
+import Settings from "./settings";
 import { connect } from 'react-redux';
 
 class Root extends React.Component {
@@ -15,6 +16,8 @@ class Root extends React.Component {
       mainScreen = <Welcome />
     } else if (this.props.didTutorial != "true") {
       mainScreen = <Tutorial />
+    } else if (this.props.settings) {
+      mainScreen = <Settings />
     } else {
       mainScreen = <Session />
     }
@@ -24,7 +27,8 @@ class Root extends React.Component {
 
 const mapStateToProps = (state) => ({
   language: state.language,
-  didTutorial: state.didTutorial
+  didTutorial: state.didTutorial,
+  settings: state.settings
 })
 
 export default connect(mapStateToProps)(Root);

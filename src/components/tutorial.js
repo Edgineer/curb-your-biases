@@ -46,9 +46,7 @@ class Tutorial extends React.Component {
 
   handleUserInput(event) {
     var input = event.target.value;
-    this.setState({
-      charCount: input.length
-    });
+    this.setState({charCount: input.length});
     localStorage.setItem("userInput",input);
     this.props.dispatch(provideNewInput(input));
   }
@@ -64,7 +62,7 @@ class Tutorial extends React.Component {
   }
 
   exitTutorial(){
-    var newSessionParams = resetWords();
+    var newSessionParams = resetWords(parseInt(this.props.maxNumRandWords));
 
     localStorage.setItem("numWords", newSessionParams.numWords);
     localStorage.setItem("userInput", "");
@@ -150,7 +148,8 @@ const mapStateToProps = (state) => ({
   voice: state.voice,
   numWords: state.numWords,
   userInput: state.userInput,
-  randWords: state.randWords
+  randWords: state.randWords,
+  maxNumRandWords: state.maxNumRandWords
 })
 
 export default connect(mapStateToProps)(Tutorial);

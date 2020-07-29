@@ -28,7 +28,7 @@ class Session extends React.Component {
   }
 
   reset () {
-    var newSessionParams = resetWords();
+    var newSessionParams = resetWords(parseInt(this.props.maxNumRandWords));
 
     localStorage.setItem("numWords", newSessionParams.numWords);
     localStorage.setItem("userInput", "");
@@ -157,7 +157,8 @@ const mapStateToProps = (state) => ({
   voice: state.voice,
   numWords: state.numWords,
   userInput: state.userInput,
-  randWords: state.randWords
+  randWords: state.randWords,
+  maxNumRandWords: state.maxNumRandWords
 })
 
 export default connect(mapStateToProps)(Session);

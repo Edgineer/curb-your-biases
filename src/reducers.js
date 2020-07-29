@@ -3,7 +3,9 @@ import {
   COMPLETE_TUTORIAL,
   PROVIDE_NEW_INPUT,
   GET_NEW_WORDS,
-  RESET_LANGUAGE
+  ENTER_SETTINGS,
+  EXIT_SETTINGS,
+  SET_MAX_NUM_RAND_WORDS
  } from './actions';
 
 const getInitialState = () => {
@@ -14,6 +16,7 @@ const getInitialState = () => {
   var numWords = localStorage.getItem("numWords");
   var userInput = localStorage.getItem("userInput");
   var randWords = localStorage.getItem("randWords");
+  var maxNumRandWords = localStorage.getItem("maxNumRandWords");
   //FUTURE ADDITION: more language options & levels
   //var level = localStorage.getItem("level");
 
@@ -23,7 +26,9 @@ const getInitialState = () => {
     "didTutorial": didTutorial,
     "numWords": numWords,
     "userInput": userInput,
-    "randWords": randWords 
+    "randWords": randWords,
+    "maxNumRandWords": maxNumRandWords,
+    "settings": false
     //FUTURE ADDITION: more language options & levels
     //"level": level
   };
@@ -52,10 +57,17 @@ export const rootReducer = (state = getInitialState(), action) => {
       return Object.assign({}, state, {
         userInput: action.input
       })
-    case RESET_LANGUAGE:
+    case ENTER_SETTINGS:
       return Object.assign({}, state, {
-        language: null,
-        voice: null
+        settings: true
+      })
+    case EXIT_SETTINGS:
+      return Object.assign({}, state, {
+        settings: false
+      })
+    case SET_MAX_NUM_RAND_WORDS:
+      return Object.assign({}, state, {
+        maxNumRandWords: action.maxNumRandWords
       })
     default:
       return state;

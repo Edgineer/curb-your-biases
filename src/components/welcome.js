@@ -1,7 +1,7 @@
 import React from "react";
 import '../index.css';
 import { connect } from 'react-redux';
-import { selectLanguage, getNewWords } from '../actions';
+import { selectLanguage, getNewWords, setMaxNumRandWords } from '../actions';
 import { getVoice, getDefaultSession } from '../functionalities';
 
 class Welcome extends React.Component {
@@ -15,16 +15,13 @@ class Welcome extends React.Component {
     this.handleLangSelection = this.handleLangSelection.bind(this);
   }
 
-  handleLangSelection(event) {
-    this.setState({curLanguage: event.target.value});
-  }
+  handleLangSelection(event) { this.setState({curLanguage: event.target.value}); }
 
   getStarted() {
-    
-    if (this.props.didTutorial == null) { 
-      //Actually the first time the tutorial is being accessed, localStorage values have never been set
-      localStorage.setItem("didTutorial","false");
-    }
+    localStorage.setItem("didTutorial","false");
+    //didTutorial prop is still undefined since it is not dispatched to update
+    localStorage.setItem("maxNumRandWords", "3");
+    this.props.dispatch(setMaxNumRandWords("3"));
 
     localStorage.setItem("language",this.state.curLanguage);
     localStorage.setItem("numWords", "1");
@@ -60,7 +57,7 @@ class Welcome extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  didTutorial: state.didTutorial
+  settings: state.settings //do removal test later
 })
 
 export default connect(mapStateToProps)(Welcome);

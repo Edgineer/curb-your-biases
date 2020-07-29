@@ -136,6 +136,14 @@ button {
   align-items: center;
 }
 
+#settings-btn-row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
 ::-webkit-scrollbar {
   width: 2px;
 }

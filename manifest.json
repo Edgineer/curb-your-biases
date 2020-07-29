@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Mumbo Jumbo",
-  "description": "Language learning gamified. Form sentences in your target language to improve your conversational skills",
-  "version": "1.1.0",
+  "description": "Language learning gamified! Form sentences in your target language to improve your writing and conversational skills. After being prompted with random words form a valid sentence that contains those words to move on to the next prompt. Grammar and spell check is performed and text to speech supported to let you hear your sentence.",
+  "version": "1.1.1",
   "permissions": [
     "storage"
   ],

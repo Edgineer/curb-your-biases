@@ -12,9 +12,8 @@ export function getDefaultSession () {
   return userLangObj.defaultSession;
 }
 
-export function resetWords () {
-
-  var randNum = Math.floor(Math.random() * (5 - 2)) + 2; //random number between [2-5]
+export function resetWords (maxNumRandWords) {
+  var randNum = Math.floor(Math.random() * maxNumRandWords) + 1; //random number between [1-maxNumRandWords]
   var translationArr = Array(randNum).fill(false);
   
   var userLang = localStorage.getItem("language");
