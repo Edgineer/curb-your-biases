@@ -1,3 +1,4 @@
+var accents = require('remove-accents');
 import {langMap} from "./languageMap";
 
 export function getVoice () {
@@ -41,20 +42,27 @@ export function resetWords (maxNumRandWords) {
 
 function getRandWordsNotUsed (userInput, randWords) {
   var lowerInput = userInput.toLowerCase();
+  var santizedInput = accents.remove(lowerInput);
   var wordsNotUsed = [];
 
   var randWordsObj = JSON.parse(randWords);
   var randWordsObjKeys = Object.keys(randWordsObj);
   var randWordsObjList = [];
+
   randWordsObjKeys.map((k) => {
     randWordsObjList.push(randWordsObj[k]);
   })
+
   randWordsObjList.forEach(wordObj => {
-    if (!lowerInput.includes(wordObj.word.toLowerCase())) {
+    var lowerWord = wordObj.word.toLowerCase();
+    var sanitizedWord = accents.remove(lowerWord);
+    if (!santizedInput.includes(sanitizedWord)) {
       wordsNotUsed.push(wordObj.word);
     }
   });
+
   return wordsNotUsed.join(", ");
+
 }
 
 export const checkInput = async function(userInput, randWords) {

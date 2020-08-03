@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Mumbo Jumbo",
-  "description": "Form valid sentences containing words from a prompt to improve your writing and conversational skills in a new language. Pass grammar and spell check to move on and hear your sentences through text to speech support.",
-  "version": "1.1.1",
+  "description": "Form sentences to improve your skills in new languages. Pass grammar & spell check and hear your sentences through voice support.",
+  "version": "1.1.2",
   "permissions": [
     "storage"
   ],

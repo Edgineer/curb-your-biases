@@ -99,6 +99,10 @@ button {
   background-color: #69d295;
 }
 
+#skip {
+  background-color:#C0C0C0;
+}
+
 #charCount{
   font-size: x-small;
   float: right;

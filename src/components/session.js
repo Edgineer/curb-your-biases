@@ -99,7 +99,11 @@ class Session extends React.Component {
 
     let feedbackMessage;
     if (!this.state.hasSubmitted){
-      feedbackMessage = <button id="submit" onClick={this.validateSubmission}>Check!</button>
+      feedbackMessage = 
+      <div id="settings-btn-row">
+        <button id="submit" onClick={this.validateSubmission}>Check!</button>
+        <button id="skip" onClick={this.reset}>skip</button>
+      </div>
     }
     else if(this.state.errors.length == 0){
       feedbackMessage = <>
@@ -128,7 +132,10 @@ class Session extends React.Component {
       feedbackMessage = <>
         {errorsDisplay}
         <br />
-        <button id="submit" onClick={this.validateSubmission}>Check!</button>
+        <div id="settings-btn-row">
+          <button id="submit" onClick={this.validateSubmission}>Check!</button>
+          <button id="skip" onClick={this.reset}>skip</button>
+        </div>
       </>
     }
     return (
