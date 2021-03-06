@@ -6,6 +6,10 @@ export const ENTER_SETTINGS = "ENTER_SETTINGS";
 export const EXIT_SETTINGS = "EXIT_SETTINGS";
 export const SET_MAX_NUM_RAND_WORDS = "SET_MAX_NUM_RAND_WORDS";
 
+// export const SET_DAILY_GOAL = "SET_DAILY_GOAL";
+// export const COMPLETE_DAILY_GOAL = "COMPLETE_DAILY_GOAL";
+// export const COMPLETE_PROMPT = "COMPLETE_PROMPT";
+
 export const selectLanguage = (lang, voice) => ({
   type: SELECT_LANGUAGE,
   language: lang,
@@ -38,4 +42,19 @@ export const exitSettings = () => ({
 export const setMaxNumRandWords = maxNumRandWords => ({
   type: SET_MAX_NUM_RAND_WORDS,
   maxNumRandWords
-})
+});
+
+/*
+export const setDailyGoal = numDailyGoals => ({
+  type: SET_DAILY_GOAL,
+  numDailyGoals
+});
+
+export const completeDailyGoal = () => ({
+  type: COMPLETE_DAILY_GOAL
+});
+
+export const completePrompt = () => ({
+  type: COMPLETE_PROMPT
+});
+*/

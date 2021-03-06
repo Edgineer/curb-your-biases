@@ -140,8 +140,8 @@ class Session extends React.Component {
     }
     return (
     <>
-      <div id="header">
-        <h1>Mumbo Jumbo!</h1>
+      <div>
+        <h1>Mumbo Jumbo Dev!</h1>
       </div>
       <p> Create a sentence in {this.props.language} that contains the following words:</p>
       <ul>{randWordList}</ul>

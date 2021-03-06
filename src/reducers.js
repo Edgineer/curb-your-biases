@@ -5,9 +5,10 @@ import {
   GET_NEW_WORDS,
   ENTER_SETTINGS,
   EXIT_SETTINGS,
-  SET_MAX_NUM_RAND_WORDS
+  SET_MAX_NUM_RAND_WORDS,
  } from './actions';
 
+// the initial state of the tree
 const getInitialState = () => {
 
   var language = localStorage.getItem("language");
@@ -36,6 +37,7 @@ const getInitialState = () => {
   return initState;
 }
 
+// A reducing function that returns the next state tree, given the current state tree and an action to handle
 export const rootReducer = (state = getInitialState(), action) => {
   switch (action.type){
     case SELECT_LANGUAGE:
