@@ -88,4 +88,5 @@ const mapStateToProps = (state) => ({
   maxNumRandWords: state.maxNumRandWords
 })
 
+// since mapDispatchToProps is not passed as a 2nd parameter, the component recieves dispatch by default to dispatch actions to the store
 export default connect(mapStateToProps)(Settings);

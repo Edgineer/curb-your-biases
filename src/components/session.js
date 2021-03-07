@@ -140,8 +140,8 @@ class Session extends React.Component {
     }
     return (
     <>
-      <div id="header">
-        <h1>Mumbo Jumbo!</h1>
+      <div>
+        <h1>Mumbo Jumbo Dev!</h1>
       </div>
       <p> Create a sentence in {this.props.language} that contains the following words:</p>
       <ul>{randWordList}</ul>
@@ -165,7 +165,7 @@ const mapStateToProps = (state) => ({
   numWords: state.numWords,
   userInput: state.userInput,
   randWords: state.randWords,
-  maxNumRandWords: state.maxNumRandWords
+  maxNumRandWords: state.maxNumRandWords,
 })
 
 export default connect(mapStateToProps)(Session);

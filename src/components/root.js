@@ -5,6 +5,7 @@ import Tutorial from "./tutorial";
 import Settings from "./settings";
 import { connect } from 'react-redux';
 
+// root component of the app which decides what component to render
 class Root extends React.Component {
   constructor(props) {
     super(props);
@@ -25,10 +26,12 @@ class Root extends React.Component {
   }
 }
 
+// the redux store state is supplied, we extract the values we need and they are mapped as props for the component
 const mapStateToProps = (state) => ({
   language: state.language,
   didTutorial: state.didTutorial,
   settings: state.settings
 })
 
+// connects the Root component to the redux store, it provides the connected component with the pieces of the data it needs from the store
 export default connect(mapStateToProps)(Root);
