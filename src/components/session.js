@@ -165,7 +165,7 @@ const mapStateToProps = (state) => ({
   numWords: state.numWords,
   userInput: state.userInput,
   randWords: state.randWords,
-  maxNumRandWords: state.maxNumRandWords
+  maxNumRandWords: state.maxNumRandWords,
 })
 
 export default connect(mapStateToProps)(Session);
